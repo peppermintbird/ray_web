@@ -1,0 +1,131 @@
+/* =========================================================
+   BASE — theme variables, reset, body, animated background
+   ========================================================= */
+
+:root {
+    /* Ambient mesh background — soft pastel palette */
+    --bg-color: #f8f7fb;
+    --blob-1: #c2eedd;
+    --blob-2: #d0eeec;
+    --blob-3: #e8dff5;
+    --blob-opacity: 0.75;
+
+    /* Apple Liquid Glass — Light Mode */
+    --glass-bg: rgba(255, 255, 255, 0.38);
+    --glass-border: rgba(255, 255, 255, 0.7);
+    --glass-shadow: rgba(120, 120, 150, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.95);
+    --glass-caustic: rgba(255, 255, 255, 0.5);
+    --reflection-start: rgba(255, 255, 255, 0.75);
+    --reflection-end: rgba(255, 255, 255, 0.0);
+    --glare-color: rgba(255, 255, 255, 0.65);
+
+    /* Active pill & icons */
+    --pill-bg: rgba(255, 255, 255, 0.88);
+    --pill-shadow: 0 4px 14px rgba(120, 120, 140, 0.08), 0 1px 2px rgba(0,0,0,0.03), inset 0 1px 1px rgba(255,255,255,0.95);
+    --icon-color: #71717a;
+    --icon-active: #27272a;
+    --text-color: #27272a;
+    --text-secondary: #71717a;
+    --accent-color: #87cfcc;
+    --accent-light: rgba(139, 92, 246, 0.12);
+    --divider: rgba(0, 0, 0, 0.08);
+
+    --card-bg: rgba(255, 255, 255, 0.48);
+    --card-border: rgba(255, 255, 255, 0.65);
+}
+
+[data-theme="dark"] {
+    /* Apple Liquid Glass — Dark Mode (muted pastels) */
+    --bg-color: #121118;
+    --blob-1: #4a344d;
+    --blob-2: #2b434a;
+    --blob-3: #3b3353;
+    --blob-opacity: 0.6;
+
+    --glass-bg: rgba(32, 30, 42, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.14);
+    --glass-shadow: rgba(0, 0, 0, 0.6);
+    --glass-highlight: rgba(255, 255, 255, 0.22);
+    --glass-caustic: rgba(255, 255, 255, 0.04);
+    --reflection-start: rgba(255, 255, 255, 0.12);
+    --reflection-end: rgba(255, 255, 255, 0.0);
+    --glare-color: rgba(255, 255, 255, 0.15);
+
+    --pill-bg: rgba(65, 62, 80, 0.78);
+    --pill-shadow: 0 4px 14px rgba(0,0,0,0.35), inset 0 1px 1px rgba(255,255,255,0.18);
+    --icon-color: #a1a1aa;
+    --icon-active: #f4f4f5;
+    --text-color: #f4f4f5;
+    --text-secondary: #a1a1aa;
+    --accent-color: #c4b5fd;
+    --accent-light: rgba(196, 181, 253, 0.15);
+    --divider: rgba(255, 255, 255, 0.12);
+
+    --card-bg: rgba(30, 28, 40, 0.45);
+    --card-border: rgba(255, 255, 255, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--text-color);
+    background: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 36px 16px;
+    -webkit-font-smoothing: antialiased;
+    position: relative;
+    overflow-x: clip;
+    transition: background 0.8s ease;
+}
+
+/* Ambient mesh background blobs */
+.bg-mesh {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--bg-color);
+    transition: background 0.8s ease;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: var(--blob-opacity);
+    animation: float 20s infinite alternate cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    will-change: transform;
+    transition: background 0.8s ease, opacity 0.8s ease;
+}
+
+.blob-1 { width: 50vw; height: 50vw; top: -10%; left: -10%; background: var(--blob-1); animation-delay: 0s; }
+.blob-2 { width: 45vw; height: 45vw; bottom: -10%; right: -10%; background: var(--blob-2); animation-delay: -5s; }
+.blob-3 { width: 35vw; height: 35vw; top: 30%; left: 40%; background: var(--blob-3); animation-delay: -10s; }
+
+@keyframes float {
+    0%   { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33%  { transform: translate(5%, 10%) scale(1.05) rotate(5deg); }
+    66%  { transform: translate(-5%, 5%) scale(0.95) rotate(-5deg); }
+    100% { transform: translate(0, -10%) scale(1.1) rotate(0deg); }
+}
+
+/* Page wrapper */
+.wrapper {
+    width: 100%;
+    max-width: 860px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+}
